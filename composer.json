@@ -1,0 +1,41 @@
+{
+  "name": "vintage/yii2-tinify",
+  "description": "Provides Tinify API to Yii2 Framework",
+  "keywords": [
+    "yii2",
+    "tinify",
+    "tinypng",
+    "tinyjpg",
+    "compress",
+    "images",
+    "api"
+  ],
+  "type": "yii2-extension",
+  "license": "BSD-3-Clause",
+  "support": {
+    "source": "https://github.com/vintage/yii2-tinify",
+    "issues": "https://github.com/vintage/yii2-tinify/issues"
+  },
+  "authors": [
+    {
+      "name": "Vladimir Kuprienko",
+      "email": "vldmr.kuprienko@gmail.com",
+      "role": "developer"
+    }
+  ],
+  "repositories": [
+    {
+      "type": "composer",
+      "url": "https://asset-packagist.org"
+    }
+  ],
+  "require": {
+    "yiisoft/yii2": "~2.0.0",
+    "tinify/tinify": "~1.1"
+  },
+  "autoload": {
+    "psr-4": {
+      "vintage\\tinify\\": "src"
+    }
+  }
+}
