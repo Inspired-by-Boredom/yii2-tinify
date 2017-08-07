@@ -17,7 +17,7 @@ composer require vintage/yii2-tinify
 ```
 or add
 ```json
-"vintage/yii2-tinify": "dev-master"
+"vintage/yii2-tinify": "~1.0"
 ```
 to the require section of your composer.json.
 
