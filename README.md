@@ -1,5 +1,11 @@
-Tinify API
-==========
+<p align="center">
+    <a href="https://tinypng.com/" target="_blank">
+        <img src="https://tinypng.com/images/social/website.jpg" height="150px">
+    </a>
+    <h1 align="center">Tinify API</h1>
+    <br>
+</p>
+
 Provides Tinify API to Yii2 Framework.
 
 [Read documentation](https://tinypng.com/developers/reference/php)
@@ -49,7 +55,7 @@ Licence
 -------
 [![License](https://poser.pugx.org/vintage/yii2-tinify/license)](https://packagist.org/packages/vintage/yii2-tinify)
 
-This project is released under the terms of the BSD-3-Clause [license](LICENSE)
+This project is released under the terms of the BSD-3-Clause [license](LICENSE).
 
 Copyright (c) 2017, [Vintage Web Production](https://vintage.com.ua/)
 
