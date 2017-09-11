@@ -6,10 +6,8 @@
     <br>
 </p>
 
-Provides Tinify API to Yii2 Framework.
-
-[Read documentation](https://tinypng.com/developers/reference/php)
-and visit [official site](https://tinypng.com/)
+Provides Tinify API to Yii2 Framework. For more information you can 
+[read documentation](https://tinypng.com/developers/reference/php) for official API for PHP.
 
 [![Total Downloads](https://poser.pugx.org/vintage/yii2-tinify/downloads)](https://packagist.org/packages/vintage/yii2-tinify)
 [![Latest Stable Version](https://poser.pugx.org/vintage/yii2-tinify/v/stable)](https://packagist.org/packages/vintage/yii2-tinify)
