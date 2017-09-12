@@ -7,6 +7,7 @@
 
 namespace vintage\tinify;
 
+use vintage\tinify\components\TinifyResize;
 use Yii;
 use yii\base\InvalidConfigException;
 use Tinify\Tinify;
@@ -97,5 +98,15 @@ class UploadedFile extends \yii\web\UploadedFile
         }
 
         return false;
+    }
+
+    /**
+     * Creates TinifyResize object.
+     *
+     * @return TinifyResize
+     */
+    public function resize()
+    {
+        return Yii::createObject(TinifyResize::class, [$this->tempName]);
     }
 }
