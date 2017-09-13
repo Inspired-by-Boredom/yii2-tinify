@@ -7,9 +7,11 @@
 
 namespace vintage\tinify\components;
 
-use Tinify\Source;
+use vintage\tinify\helpers\TinifyData;
+use Yii;
 use yii\base\Object;
 use yii\base\InvalidConfigException;
+use Tinify\Source;
 
 /**
  * Component for image resizing.
@@ -44,10 +46,17 @@ class TinifyResize extends Object
     /**
      * @inheritdoc
      * @param string $fileName
+     * @throws InvalidConfigException
      */
     public function __construct($fileName, $config = [])
     {
-        $this->fileName = $fileName;
+        $this->fileName = Yii::getAlias($fileName);
+
+        $mimeType = mime_content_type($this->fileName);
+        if (!in_array($mimeType, TinifyData::getAllowedMimeTypes())) {
+            throw new InvalidConfigException('You can resize only "jpg" and "png" images');
+        }
+
         parent::__construct($config);
     }
 
