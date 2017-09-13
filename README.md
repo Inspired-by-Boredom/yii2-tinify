@@ -10,8 +10,8 @@ Facade of Tinify API for Yii2 Framework. This extension allows you to compress a
 For more information you can [read documentation](https://tinypng.com/developers/reference/php) for official API for PHP.
 
 [![Total Downloads](https://poser.pugx.org/vintage/yii2-tinify/downloads)](https://packagist.org/packages/vintage/yii2-tinify)
-[![Latest Stable Version](https://poser.pugx.org/vintage/yii2-tinify/v/stable)](https://packagist.org/packages/vintage/yii2-tinify)
-[![Latest Unstable Version](https://poser.pugx.org/vintage/yii2-tinify/v/unstable)](https://packagist.org/packages/vintage/yii2-tinify)
+[![Latest Stable Version](https://poser.pugx.org/vintage/yii2-tinify/v/stable)](CHANGELOG.md)
+[![Latest Unstable Version](https://poser.pugx.org/vintage/yii2-tinify/v/unstable)](CHANGELOG.md)
 
 Installation
 ------------
@@ -71,7 +71,7 @@ or resize existing image
 
 Licence
 -------
-[![License](https://poser.pugx.org/vintage/yii2-tinify/license)](https://packagist.org/packages/vintage/yii2-tinify)
+[![License](https://poser.pugx.org/vintage/yii2-tinify/license)](LICENSE)
 
 This project is released under the terms of the BSD-3-Clause [license](LICENSE).
 
