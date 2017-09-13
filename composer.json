@@ -1,20 +1,22 @@
 {
   "name": "vintage/yii2-tinify",
-  "description": "Provides Tinify API to Yii2 Framework",
+  "description": "Facade of Tinify API for Yii2 Framework",
   "keywords": [
     "yii2",
+    "component",
+    "api",
     "tinify",
     "tinypng",
     "tinyjpg",
     "compress",
-    "images",
-    "api"
+    "resize",
+    "images"
   ],
   "type": "yii2-extension",
   "license": "BSD-3-Clause",
   "support": {
-    "source": "https://github.com/vintage/yii2-tinify",
-    "issues": "https://github.com/vintage/yii2-tinify/issues"
+    "issues": "https://github.com/vintage/yii2-tinify/issues",
+    "source": "https://github.com/vintage/yii2-tinify"
   },
   "authors": [
     {
