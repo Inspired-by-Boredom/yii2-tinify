@@ -7,11 +7,14 @@
 
 namespace vintage\tinify\components;
 
-use vintage\tinify\helpers\TinifyData;
 use Yii;
 use yii\base\Object;
 use yii\base\InvalidConfigException;
 use Tinify\Source;
+use vintage\tinify\algorithms\Cover;
+use vintage\tinify\algorithms\Fit;
+use vintage\tinify\algorithms\Scale;
+use vintage\tinify\helpers\TinifyData;
 
 /**
  * Component for image resizing.
@@ -21,10 +24,6 @@ use Tinify\Source;
  */
 class TinifyResize extends Object
 {
-    const ALGORITHM_SCALE   = 'scale';
-    const ALGORITHM_FIT     = 'fit';
-    const ALGORITHM_COVER   = 'cover';
-
     /**
      * @var string
      */
@@ -59,55 +58,13 @@ class TinifyResize extends Object
     }
 
     /**
-     * Returns config for resize.
-     *
-     * @return array
-     * @throws InvalidConfigException
-     */
-    protected function getConfig()
-    {
-        $config = ['method' => $this->algorithm];
-        switch ($this->algorithm) {
-            case self::ALGORITHM_SCALE:
-                if (!empty($this->width)) {
-                    $config['width'] = $this->width;
-                } else {
-                    $config['height'] = $this->height;
-                }
-                break;
-            case self::ALGORITHM_FIT:
-                if (empty($this->width) || empty($this->height)) {
-                    throw new InvalidConfigException(
-                        'For "' . self::ALGORITHM_FIT . '" algorithm you should to set a "width" and "height"'
-                    );
-                }
-                $config['width'] = $this->height;
-                $config['height'] = $this->height;
-                break;
-            case self::ALGORITHM_COVER:
-                if (empty($this->width)) {
-                    $config['width'] = $this->height;
-                    $config['height'] = $this->height;
-                } elseif (empty($this->height)) {
-                    $config['width'] = $this->width;
-                    $config['height'] = $this->width;
-                } else {
-                    $config['width'] = $this->width;
-                    $config['height'] = $this->height;
-                }
-                break;
-        }
-        return $config;
-    }
-
-    /**
      * Sets algorithm 'scale'.
      *
      * @return self
      */
     public function scale()
     {
-        $this->algorithm = self::ALGORITHM_SCALE;
+        $this->algorithm = Scale::className();
         return $this;
     }
 
@@ -118,7 +75,7 @@ class TinifyResize extends Object
      */
     public function fit()
     {
-        $this->algorithm = self::ALGORITHM_FIT;
+        $this->algorithm = Fit::className();
         return $this;
     }
 
@@ -129,7 +86,7 @@ class TinifyResize extends Object
      */
     public function cover()
     {
-        $this->algorithm = self::ALGORITHM_COVER;
+        $this->algorithm = Cover::className();
         return $this;
     }
 
@@ -172,6 +129,21 @@ class TinifyResize extends Object
         }
 
         $source = Source::fromFile($this->fileName);
-        $source->resize($this->getConfig())->toFile($this->fileName);
+        $source->resize($this->buildAlgorithmInstance()->getConfig())
+            ->toFile($this->fileName);
+    }
+
+    /**
+     * Creates algorithm instance.
+     *
+     * @return \vintage\tinify\algorithms\TinifyAlgorithmInterface
+     */
+    protected function buildAlgorithmInstance()
+    {
+        return Yii::createObject([
+            'class' => $this->algorithm,
+            'width' => $this->width,
+            'height' => $this->height,
+        ]);
     }
 }
