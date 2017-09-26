@@ -9,6 +9,7 @@
 Facade of Tinify API for Yii2 Framework. This extension allows you to compress and resize images without loss quality.
 For more information you can [read documentation](https://tinypng.com/developers/reference/php) for official API for PHP.
 
+[![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/Vintage-web-production/yii2-tinify/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/Vintage-web-production/yii2-tinify/?branch=master)
 [![Total Downloads](https://poser.pugx.org/vintage/yii2-tinify/downloads)](https://packagist.org/packages/vintage/yii2-tinify)
 [![Latest Stable Version](https://poser.pugx.org/vintage/yii2-tinify/v/stable)](CHANGELOG.md)
 [![Latest Unstable Version](https://poser.pugx.org/vintage/yii2-tinify/v/unstable)](CHANGELOG.md)
