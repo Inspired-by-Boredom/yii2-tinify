@@ -56,25 +56,32 @@ class UploadedFile extends \yii\web\UploadedFile
      */
     public function saveAs($file, $deleteTempFile = true)
     {
-        $mimeType = mime_content_type($this->tempName);
-        $allowedMimeTypes = TinifyData::getAllowedMimeTypes();
-
         if ($this->error == UPLOAD_ERR_OK) {
             if ($deleteTempFile) {
-                if ($this->compress && in_array($mimeType, $allowedMimeTypes)) {
+                if ($this->allowCompression()) {
                     $res = $this->compressFile($this->tempName, $file);
                     unlink($this->tempName);
                     return $res;
                 }
                 return move_uploaded_file($this->tempName, $file);
             } elseif (is_uploaded_file($this->tempName)) {
-                if ($this->compress && in_array($mimeType, $allowedMimeTypes)) {
-                    return $this->compressFile($this->tempName, $file);
-                }
-                return copy($this->tempName, $file);
+                return $this->allowCompression()
+                    ? $this->compressFile($this->tempName, $file)
+                    : copy($this->tempName, $file);
             }
         }
         return false;
+    }
+
+    /**
+     * Check where compressing is allowed for current file.
+     *
+     * @return bool
+     */
+    protected function allowCompression()
+    {
+        $mimeType = mime_content_type($this->tempName);
+        return $this->compress && in_array($mimeType, TinifyData::getAllowedMimeTypes());
     }
 
     /**
