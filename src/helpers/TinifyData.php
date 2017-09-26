@@ -42,4 +42,15 @@ class TinifyData
     {
         return ['image/jpeg', 'image/png'];
     }
+
+    /**
+     * Check where compressing is allowed for current file.
+     *
+     * @param string $fileName
+     * @return bool
+     */
+    public static function allowCompression($fileName)
+    {
+        return in_array(mime_content_type($fileName), self::getAllowedMimeTypes());
+    }
 }

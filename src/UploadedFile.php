@@ -80,8 +80,7 @@ class UploadedFile extends \yii\web\UploadedFile
      */
     protected function allowCompression()
     {
-        $mimeType = mime_content_type($this->tempName);
-        return $this->compress && in_array($mimeType, TinifyData::getAllowedMimeTypes());
+        return $this->compress && TinifyData::allowCompression($this->tempName);
     }
 
     /**

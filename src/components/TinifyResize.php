@@ -51,9 +51,7 @@ class TinifyResize extends Object
     public function __construct($fileName, $config = [])
     {
         $this->fileName = Yii::getAlias($fileName);
-
-        $mimeType = mime_content_type($this->fileName);
-        if (!in_array($mimeType, TinifyData::getAllowedMimeTypes())) {
+        if (!TinifyData::allowCompression($this->fileName)) {
             throw new InvalidConfigException('You can resize only "jpg" and "png" images');
         }
 
@@ -66,19 +64,12 @@ class TinifyResize extends Object
      * @return array
      * @throws InvalidConfigException
      */
-    protected function resizeConfig()
+    protected function getConfig()
     {
-        if ($this->width == null && $this->height == null) {
-            throw new InvalidConfigException('You should to set "width" or "height" ');
-        }
-        if ($this->algorithm == null) {
-            $this->scale();
-        }
-
         $config = ['method' => $this->algorithm];
         switch ($this->algorithm) {
             case self::ALGORITHM_SCALE:
-                if (!empty($this->_width)) {
+                if (!empty($this->width)) {
                     $config['width'] = $this->width;
                 } else {
                     $config['height'] = $this->height;
@@ -94,10 +85,10 @@ class TinifyResize extends Object
                 $config['height'] = $this->height;
                 break;
             case self::ALGORITHM_COVER:
-                if (empty($this->_width)) {
+                if (empty($this->width)) {
                     $config['width'] = $this->height;
                     $config['height'] = $this->height;
-                } elseif (empty($this->_height)) {
+                } elseif (empty($this->height)) {
                     $config['width'] = $this->width;
                     $config['height'] = $this->width;
                 } else {
@@ -106,7 +97,6 @@ class TinifyResize extends Object
                 }
                 break;
         }
-
         return $config;
     }
 
@@ -174,7 +164,14 @@ class TinifyResize extends Object
      */
     public function process()
     {
+        if ($this->width == null && $this->height == null) {
+            throw new InvalidConfigException('You should to set "width" or "height" ');
+        }
+        if ($this->algorithm == null) {
+            $this->scale();
+        }
+
         $source = Source::fromFile($this->fileName);
-        $source->resize($this->resizeConfig())->toFile($this->fileName);
+        $source->resize($this->getConfig())->toFile($this->fileName);
     }
 }

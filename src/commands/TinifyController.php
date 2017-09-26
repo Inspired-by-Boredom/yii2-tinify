@@ -134,8 +134,11 @@ class TinifyController extends Controller
         $filesToCompress = [];
         foreach ($files as $file) {
             $filePath = Yii::getAlias($path . DIRECTORY_SEPARATOR . $file);
-            if ((is_file($filePath) && file_exists($filePath)) &&
-                in_array(mime_content_type($filePath), TinifyData::getAllowedMimeTypes())) {
+            if (
+                (is_file($filePath)
+                && file_exists($filePath))
+                && TinifyData::allowCompression($filePath)
+            ) {
                 $filesToCompressCount++;
                 $filesToCompress[] = $filePath;
             }
