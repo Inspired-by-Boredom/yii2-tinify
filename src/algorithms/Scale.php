@@ -7,6 +7,8 @@
 
 namespace vintage\tinify\algorithms;
 
+use yii\base\InvalidConfigException;
+
 /**
  * Scale image algorithm.
  *
@@ -20,6 +22,12 @@ class Scale extends AbstractAlgorithm
      */
     public function getConfig()
     {
+        if (empty($this->width) && empty($this->height)) {
+            throw new InvalidConfigException(
+                'For "' . self::className() . '" algorithm you should to set a "width" or "height"'
+            );
+        }
+
         $config = [];
         if (!empty($this->width)) {
             $config['width'] = $this->width;

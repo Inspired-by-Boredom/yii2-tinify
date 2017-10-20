@@ -117,6 +117,7 @@ class TinifyResize extends Object
     /**
      * Resize image.
      *
+     * @return bool
      * @throws InvalidConfigException
      */
     public function process()
@@ -128,9 +129,12 @@ class TinifyResize extends Object
             $this->scale();
         }
 
-        $source = Source::fromFile($this->fileName);
-        $source->resize($this->buildAlgorithmInstance()->getConfig())
+        $config = $this->buildAlgorithmInstance()->getConfig();
+        $result = Source::fromFile($this->fileName)
+            ->resize($config)
             ->toFile($this->fileName);
+
+        return (bool)$result;
     }
 
     /**
