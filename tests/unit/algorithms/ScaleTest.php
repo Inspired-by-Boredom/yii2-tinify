@@ -18,6 +18,14 @@ use vintage\tinify\algorithms\Scale;
  */
 class ScaleTest extends TestCase
 {
+    public function testInstanceOf()
+    {
+        $this->assertInstanceOf(
+            'vintage\tinify\algorithms\TinifyAlgorithmInterface',
+            new Scale()
+        );
+    }
+
     /**
      * @expectedException \yii\base\InvalidConfigException
      */

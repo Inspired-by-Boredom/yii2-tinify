@@ -18,6 +18,14 @@ use vintage\tinify\algorithms\Fit;
  */
 class FitTest extends TestCase
 {
+    public function testInstanceOf()
+    {
+        $this->assertInstanceOf(
+            'vintage\tinify\algorithms\TinifyAlgorithmInterface',
+            new Fit()
+        );
+    }
+
     /**
      * @expectedException \yii\base\InvalidConfigException
      */

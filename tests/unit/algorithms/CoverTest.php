@@ -18,6 +18,14 @@ use vintage\tinify\algorithms\Cover;
  */
 class CoverTest extends TestCase
 {
+    public function testInstanceOf()
+    {
+        $this->assertInstanceOf(
+            'vintage\tinify\algorithms\TinifyAlgorithmInterface',
+            new Cover()
+        );
+    }
+
     /**
      * @dataProvider configProvider
      */
