@@ -25,7 +25,7 @@ class TinifyDataTest extends TestCase
         $this->assertNull(TinifyData::getApiToken());
 
         Yii::$app->params[TinifyData::PARAM_KEY_API_TOKEN] = 'test';
-        $this->assertInternalType(IsType::TYPE_STRING, TinifyData::getApiToken());
+        $this->assertInternalType('string', TinifyData::getApiToken());
     }
 
     public function testGetAllowedMimeTypes()

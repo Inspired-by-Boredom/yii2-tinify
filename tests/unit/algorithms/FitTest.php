@@ -18,9 +18,11 @@ use vintage\tinify\algorithms\Fit;
  */
 class FitTest extends TestCase
 {
+    /**
+     * @expectedException \yii\base\InvalidConfigException
+     */
     public function testGetConfigFail()
     {
-        $this->expectException('yii\base\InvalidConfigException');
         (new Fit())->getConfig();
     }
 

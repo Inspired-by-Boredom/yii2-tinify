@@ -34,17 +34,20 @@ class TinifyResizeTest extends TestCase
         new TinifyResize($this->getImagePath());
     }
 
+    /**
+     * @expectedException yii\base\InvalidConfigException
+     */
     public function testCreateInstanceFail()
     {
-        $this->expectException('yii\base\InvalidConfigException');
-
         $notImage = Yii::getAlias('@data/not-image.txt');
         new TinifyResize($notImage);
     }
 
+    /**
+     * @expectedException yii\base\InvalidConfigException
+     */
     public function testProcessFail()
     {
-        $this->expectException('yii\base\InvalidConfigException');
         (new TinifyResize($this->getImagePath()))->process();
     }
 }

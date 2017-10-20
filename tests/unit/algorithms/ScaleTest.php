@@ -18,9 +18,11 @@ use vintage\tinify\algorithms\Scale;
  */
 class ScaleTest extends TestCase
 {
+    /**
+     * @expectedException \yii\base\InvalidConfigException
+     */
     public function testGetConfigFail()
     {
-        $this->expectException('yii\base\InvalidConfigException');
         (new Scale())->getConfig();
     }
 
