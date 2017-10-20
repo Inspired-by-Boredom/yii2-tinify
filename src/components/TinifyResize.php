@@ -133,7 +133,7 @@ class TinifyResize extends Object
 
         $config = $this->buildAlgorithmInstance()->getConfig();
         $result = false;
-        
+
         try {
             $result = Source::fromFile($this->fileName)
                 ->resize($config)

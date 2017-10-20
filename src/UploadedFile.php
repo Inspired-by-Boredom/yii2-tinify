@@ -7,17 +7,16 @@
 
 namespace vintage\tinify;
 
-use vintage\tinify\components\TinifyResize;
 use Yii;
 use yii\base\InvalidConfigException;
 use Tinify\Tinify;
 use Tinify\Source;
 use Tinify\AccountException;
-use Exception;
 use vintage\tinify\helpers\TinifyData;
+use vintage\tinify\components\TinifyResize;
 
 /**
- * Provides Tinify API
+ * Provides Tinify API.
  *
  * API documentation
  * @see https://tinypng.com/developers/reference/php
@@ -93,17 +92,15 @@ class UploadedFile extends \yii\web\UploadedFile
      */
     protected function compressFile($tempFile, $resultFile)
     {
+        $res = false;
         try {
-            $source = Source::fromFile($tempFile);
-            $res = $source->toFile($resultFile);
-            return (bool)$res;
+            $res = Source::fromFile($tempFile)->toFile($resultFile);
         } catch (AccountException $ex) {
             throw $ex;
-        } catch (Exception $ex) {
+        } catch (\Exception $ex) {
             Yii::trace($ex->getMessage(), 'tinify');
         }
-
-        return false;
+        return (bool)$res;
     }
 
     /**
