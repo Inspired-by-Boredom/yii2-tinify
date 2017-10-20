@@ -5,7 +5,7 @@
  * @license BSD 3-Clause License
  */
 
-namespace vintage\tinify\commands;
+namespace vintage\tinify\cli;
 
 use Yii;
 use yii\base\InvalidConfigException;
@@ -18,7 +18,7 @@ use Tinify\Source;
 use vintage\tinify\helpers\TinifyData;
 
 /**
- * Tinify console commands
+ * CLI with features for Tinify.
  *
  * @author Vladimir Kuprienko <vldmr.kuprienko@gmail.com>
  * @since 1.0
@@ -46,7 +46,7 @@ class TinifyController extends Controller
     }
 
     /**
-     * Check API work status
+     * Check API work status.
      *
      * @param null|string $token
      * @return int
@@ -69,10 +69,10 @@ class TinifyController extends Controller
     }
 
     /**
-     * Compress image
+     * Compress image.
      *
-     * @param string $src Path to source image
-     * @param string $dest Path for destination image
+     * @param string $src Path to source image.
+     * @param string $dest Path for destination image.
      * @return int
      * @throws \Exception
      */
@@ -115,7 +115,7 @@ class TinifyController extends Controller
      * Compress images in catalog.
      * Old images will be moved to catalog with name "old".
      *
-     * @param string $path Path to images files
+     * @param string $path Path to images files.
      * @throws \Exception
      */
     public function actionCompressCatalog($path)
@@ -170,7 +170,7 @@ class TinifyController extends Controller
     }
 
     /**
-     * Display compressed images count
+     * Display compressed images count.
      *
      * @return int
      */

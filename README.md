@@ -63,7 +63,7 @@ or resize existing image
 ```php
 'controllerMap' => [
     // ...
-    'tinify' => \vintage\tinify\commands\TinifyController::class,
+    'tinify' => \vintage\tinify\cli\TinifyController::class,
 ],
 ```
 2. Run in console `./yii tinify/<command>`
