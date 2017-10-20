@@ -1,9 +1,12 @@
 Tinify API Change Log
 =====================
 
-Under development
------------------
+2.0.0 Under development
+-----------------------
 * Enh: Creates component for image resizing
+* Enh: Refactored code
+* Enh: Creates unit tests for logic
+* Chg: Moves console controller to another namespace
 
 1.0.0 August 07, 2017
 ---------------------

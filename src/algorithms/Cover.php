@@ -11,7 +11,7 @@ namespace vintage\tinify\algorithms;
  * Cover image algorithm.
  *
  * @author Vladimir Kuprienko <vldmr.kuprienko@gmail.com>
- * @since 1.1
+ * @since 2.0
  */
 class Cover extends AbstractAlgorithm
 {

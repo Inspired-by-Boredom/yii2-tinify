@@ -21,7 +21,7 @@ use vintage\tinify\helpers\TinifyData;
  * Component for image resizing.
  *
  * @author Vladimir Kuprienko <vldmr.kuprienko@gmail.com>
- * @since 1.1
+ * @since 2.0
  */
 class TinifyResize extends Object
 {

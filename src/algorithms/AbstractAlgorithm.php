@@ -13,7 +13,7 @@ use yii\base\Object;
  * Abstract algorithm class.
  *
  * @author Vladimir Kuprienko <vldmr.kuprienko@gmail.com>
- * @since 1.1
+ * @since 2.0
  */
 abstract class AbstractAlgorithm extends Object implements TinifyAlgorithmInterface
 {

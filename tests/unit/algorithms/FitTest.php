@@ -14,7 +14,7 @@ use vintage\tinify\algorithms\Fit;
  * Test case for Fit algorithm.
  *
  * @author Vladimir Kuprienko <vldmr.kuprienko@gmail.com>
- * @since 1.1
+ * @since 2.0
  */
 class FitTest extends TestCase
 {

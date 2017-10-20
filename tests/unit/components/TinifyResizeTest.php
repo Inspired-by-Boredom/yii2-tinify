@@ -15,7 +15,7 @@ use vintage\tinify\tests\unit\TestCase;
  * Test case for TinifyResize component.
  *
  * @author Vladimir Kuprienko <vldmr.kuprienko@gmail.com>
- * @since 1.1
+ * @since 2.0
  */
 class TinifyResizeTest extends TestCase
 {

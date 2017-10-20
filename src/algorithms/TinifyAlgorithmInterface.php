@@ -11,7 +11,7 @@ namespace vintage\tinify\algorithms;
  * Interface for Tinify algorithms.
  *
  * @author Vladimir Kuprienko <vldmr.kuprienko@gmail.com>
- * @since 1.1
+ * @since 2.0
  */
 interface TinifyAlgorithmInterface
 {

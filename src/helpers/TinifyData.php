@@ -48,6 +48,7 @@ class TinifyData
      *
      * @param string $fileName
      * @return bool
+     * @since 2.0
      */
     public static function allowCompression($fileName)
     {

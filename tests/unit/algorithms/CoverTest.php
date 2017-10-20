@@ -14,7 +14,7 @@ use vintage\tinify\algorithms\Cover;
  * Test case for Cover algorithm.
  *
  * @author Vladimir Kuprienko <vldmr.kuprienko@gmail.com>
- * @since 1.1
+ * @since 2.0
  */
 class CoverTest extends TestCase
 {

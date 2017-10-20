@@ -11,7 +11,7 @@ namespace vintage\tinify\tests\unit;
  * Base test case class.
  *
  * @author Vladimir Kuprienko <vldmr.kuprienko@gmail.com>
- * @since 1.1
+ * @since 2.0
  */
 class TestCase extends \Codeception\Test\Unit
 {

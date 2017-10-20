@@ -76,6 +76,7 @@ class UploadedFile extends \yii\web\UploadedFile
      * Check where compressing is allowed for current file.
      *
      * @return bool
+     * @since 2.0
      */
     protected function allowCompression()
     {
@@ -83,7 +84,7 @@ class UploadedFile extends \yii\web\UploadedFile
     }
 
     /**
-     * Compress file method
+     * Compress file method.
      *
      * @param string $tempFile path to temp file.
      * @param string $resultFile path for save compressed file.
@@ -107,6 +108,7 @@ class UploadedFile extends \yii\web\UploadedFile
      * Creates TinifyResize object.
      *
      * @return TinifyResize
+     * @since 2.0
      */
     public function resize()
     {
