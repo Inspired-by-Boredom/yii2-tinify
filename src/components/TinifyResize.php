@@ -11,6 +11,7 @@ use Yii;
 use yii\base\Object;
 use yii\base\InvalidConfigException;
 use Tinify\Source;
+use Tinify\AccountException;
 use vintage\tinify\algorithms\Cover;
 use vintage\tinify\algorithms\Fit;
 use vintage\tinify\algorithms\Scale;
@@ -119,6 +120,7 @@ class TinifyResize extends Object
      *
      * @return bool
      * @throws InvalidConfigException
+     * @throws AccountException
      */
     public function process()
     {
@@ -130,9 +132,17 @@ class TinifyResize extends Object
         }
 
         $config = $this->buildAlgorithmInstance()->getConfig();
-        $result = Source::fromFile($this->fileName)
-            ->resize($config)
-            ->toFile($this->fileName);
+        $result = false;
+        
+        try {
+            $result = Source::fromFile($this->fileName)
+                ->resize($config)
+                ->toFile($this->fileName);
+        } catch (AccountException $ex) {
+            throw $ex;
+        } catch (\Exception $ex) {
+            Yii::trace($ex->getMessage(), 'tinify');
+        }
 
         return (bool)$result;
     }
