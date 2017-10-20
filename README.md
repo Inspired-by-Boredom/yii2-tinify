@@ -38,6 +38,17 @@ Usage
 1. Configure API token in app params with key `tinify-api-token` or in `UploadedFile` component
 2. Use `\vintage\tinify\UploadedFile` instead `\yii\web\UploadedFile`
 
+If you need to save some metadata, for example `location`, you can configure `saveMetadata` option like follow
+
+```php
+use vintage\tinify\UploadedFile;
+
+$file = UploadedFile::getInstance($model, 'image');
+$file->saveMetadata = UploadedFile::METADATA_LOCATION;
+// or more items
+$file->saveMetadata = [UploadedFile::METADATA_LOCATION, UploadedFile::METADATA_CREATION];
+```
+
 ### Resizing
 You can resize uploaded file
 ```php

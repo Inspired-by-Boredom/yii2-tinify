@@ -6,6 +6,7 @@ Tinify API Change Log
 * Enh: Creates component for image resizing
 * Enh: Refactored code
 * Enh: Creates unit tests for logic
+* Enh: Adds possibility to save metadata in image
 * Chg: Moves console controller to another namespace
 
 1.0.0 August 07, 2017

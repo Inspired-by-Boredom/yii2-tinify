@@ -26,14 +26,23 @@ use vintage\tinify\components\TinifyResize;
  */
 class UploadedFile extends \yii\web\UploadedFile
 {
-    /**
-     * @var bool flag for compress images
-     */
-    public $compress = true;
+    const METADATA_COPYRIGHT    = 'copyright';
+    const METADATA_CREATION     = 'creation';
+    const METADATA_LOCATION     = 'location';
+
     /**
      * @var null|string
      */
     public $apiToken = null;
+    /**
+     * @var bool Flag for compress images.
+     */
+    public $compress = true;
+    /**
+     * @var array What metadata need to save.
+     * @since 2.0
+     */
+    public $saveMetadata = [];
 
 
     /**
@@ -95,7 +104,11 @@ class UploadedFile extends \yii\web\UploadedFile
     {
         $res = false;
         try {
-            $res = Source::fromFile($tempFile)->toFile($resultFile);
+            $source = Source::fromFile($tempFile);
+            if (!empty($this->saveMetadata)) {
+                $source = $source->preserve($this->saveMetadata);
+            }
+            $res = $source->toFile($resultFile);
         } catch (AccountException $ex) {
             throw $ex;
         } catch (\Exception $ex) {
