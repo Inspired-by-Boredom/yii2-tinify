@@ -7,7 +7,7 @@
 </p>
 
 Facade of Tinify API for Yii2 Framework. This extension allows you to compress and resize images without loss quality.
-For more information you can [read documentation](https://tinypng.com/developers/reference/php) for official API for PHP.
+For more information you can [read official](https://tinypng.com/developers/reference/php) API documentation for PHP.
 
 [![Build Status](https://travis-ci.org/Vintage-web-production/yii2-tinify.svg?branch=master)](https://travis-ci.org/Vintage-web-production/yii2-tinify)
 [![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/Vintage-web-production/yii2-tinify/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/Vintage-web-production/yii2-tinify/?branch=master)
@@ -33,11 +33,12 @@ to the require section of your `composer.json` file.
 
 Usage
 -----
-#### Component
+
+### Component
 1. Configure API token in app params with key `tinify-api-token` or in `UploadedFile` component
 2. Use `\vintage\tinify\UploadedFile` instead `\yii\web\UploadedFile`
 
-#### Resizing
+### Resizing
 You can resize uploaded file
 ```php
 $file = \vintage\tinify\UploadedFile::getInstance($model, 'image');
@@ -57,7 +58,7 @@ or resize existing image
     ->process();
 ```
 
-#### Commands
+### CLI
 1. Configure console controller in `console/config/main.php`
 ```php
 'controllerMap' => [
