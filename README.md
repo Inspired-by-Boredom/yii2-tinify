@@ -9,6 +9,7 @@
 Facade of Tinify API for Yii2 Framework. This extension allows you to compress and resize images without loss quality.
 For more information you can [read documentation](https://tinypng.com/developers/reference/php) for official API for PHP.
 
+[![Build Status](https://travis-ci.org/Vintage-web-production/yii2-tinify.svg?branch=master)](https://travis-ci.org/Vintage-web-production/yii2-tinify)
 [![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/Vintage-web-production/yii2-tinify/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/Vintage-web-production/yii2-tinify/?branch=master)
 [![Total Downloads](https://poser.pugx.org/vintage/yii2-tinify/downloads)](https://packagist.org/packages/vintage/yii2-tinify)
 [![Latest Stable Version](https://poser.pugx.org/vintage/yii2-tinify/v/stable)](CHANGELOG.md)
@@ -16,15 +17,19 @@ For more information you can [read documentation](https://tinypng.com/developers
 
 Installation
 ------------
+
+#### Install package
+
 Run command
+```bash
+$ composer require vintage/yii2-tinify
 ```
-composer require vintage/yii2-tinify
-```
+
 or add
 ```json
 "vintage/yii2-tinify": "~1.0"
 ```
-to the require section of your composer.json.
+to the require section of your `composer.json` file.
 
 Usage
 -----
@@ -62,13 +67,26 @@ or resize existing image
 ```
 2. Run in console `./yii tinify/<command>`
 
-    `./yii tinify/test-connect [api-token]` - test connection to API
-    
-    `./yii tinify/compress '/path/to/src.jpg' '/path/to/dest.jpg'` - compress image
-    
-    `./yii tinify/compress-catalog '/path/to/catalog'` - compress all images in catalog
-    
-    `./yii tinify/count` - display compression images count
+    | Command | Description |
+    |---------|-------------|
+    | `$ ./yii tinify/test-connect [api-token]` | Test connection to API |
+    | `$ ./yii tinify/compress '/path/to/src.jpg' '/path/to/dest.jpg'` | Compress image |
+    | `$ ./yii tinify/compress-catalog '/path/to/catalog'` | Compress all images in catalog |
+    | `$ ./yii tinify/count` | Display compression images count |
+
+Tests
+-----
+You can run tests with composer command
+
+```bash
+$ composer test
+```
+
+or using following command
+
+```bash
+$ codecept build && codecept run
+```
 
 Licence
 -------
