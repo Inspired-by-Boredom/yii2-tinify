@@ -6,7 +6,7 @@
     <br>
 </p>
 
-Facade of Tinify API for Yii2 Framework. This extension allows you to compress and resize images without loss quality.
+Facade of Tinify API for Yii2 Framework. This extension allows you to resize and compress images without loss of quality.
 For more information you can [read official](https://tinypng.com/developers/reference/php) API documentation for PHP.
 
 [![Build Status](https://travis-ci.org/Vintage-web-production/yii2-tinify.svg?branch=master)](https://travis-ci.org/Vintage-web-production/yii2-tinify)
@@ -36,7 +36,7 @@ Usage
 
 ### Component
 1. Configure API token in app params with key `tinify-api-token` or in `UploadedFile` component
-2. Use `\vintage\tinify\UploadedFile` instead `\yii\web\UploadedFile`
+2. Use `\vintage\tinify\UploadedFile` instead of `\yii\web\UploadedFile`
 
 If you need to save some metadata, for example `location`, you can configure `saveMetadata` option like follow
 
