@@ -1,8 +1,8 @@
 Tinify API Change Log
 =====================
 
-2.0.0 Under development
------------------------
+2.0.0 October 24, 2017
+----------------------
 * Enh: Creates component for image resizing
 * Enh: Refactored code
 * Enh: Creates unit tests for logic
