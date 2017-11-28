@@ -63,6 +63,8 @@ $file->saveAs('@webroot/uploads');
 
 or resize existing image
 ```php
+\Tinify\setKey(\vintage\tinify\helpers\TinifyData::getApiToken());
+
 (new \vintage\tinify\components\TinifyResize('@webroot/uploads/image.jpg'))
     ->scale()
     ->width(600)
