@@ -22,7 +22,7 @@ use Tinify\Source;
 use vintage\tinify\helpers\TinifyData;
 
 /**
- * CLI with features for Tinify.
+ * CLI with many features for Tinify.
  *
  * @author Vladimir Kuprienko <vldmr.kuprienko@gmail.com>
  * @since 1.0
@@ -32,7 +32,7 @@ class TinifyController extends Controller
     /**
      * @var null|string
      */
-    protected $_apiToken = null;
+    protected $apiToken = null;
 
 
     /**
@@ -42,8 +42,8 @@ class TinifyController extends Controller
     {
         $paramToken = TinifyData::getApiToken();
 
-        if ($paramToken === null) {
-            throw new InvalidConfigException('You should to set API token');
+        if (null === $paramToken) {
+            throw new InvalidConfigException('You must to set API token');
         }
 
         Tinify::setKey($paramToken);
@@ -53,12 +53,14 @@ class TinifyController extends Controller
      * Check API work status.
      *
      * @param null|string $token
+     *
      * @return int
+     *
      * @throws InvalidConfigException
      */
     public function actionTestConnect($token = null)
     {
-        if ($token !== null) {
+        if (null !== $token) {
             Tinify::setKey($token);
         }
 
@@ -75,24 +77,27 @@ class TinifyController extends Controller
     /**
      * Compress image.
      *
-     * @param string $src Path to source image.
-     * @param string $dest Path for destination image.
+     * @param string $src   Path to source image.
+     * @param string $dest  Path for destination image.
+     *
      * @return int
+     *
      * @throws \Exception
      */
     public function actionCompress($src, $dest)
     {
         $isURL = true;
+
         if (!preg_match('/^(http|https):\/\/[a-zA-Z0-9\.-\/]+.(jpg|png)$/', $src)) {
             $isURL = false;
-
             $src = Yii::getAlias($src);
+
             if (!file_exists($src)) {
                 throw new \Exception('Source file not found!');
             }
 
             $fileSize = filesize($src);
-            $this->stdout("Before compressing size: $fileSize bytes\n", Console::FG_GREEN);
+            $this->stdout("Image size before compressing: $fileSize bytes\n", Console::FG_GREEN);
         }
 
         $dest = Yii::getAlias($dest);
@@ -104,22 +109,25 @@ class TinifyController extends Controller
             } else {
                 $source = Source::fromUrl($src);
             }
+
             $source->toFile($dest);
         } catch (\Exception $ex) {
             throw $ex;
         }
 
         $fileSize = filesize($dest);
-        $this->stdout("After compressing size: $fileSize bytes\n", Console::FG_GREEN);
+        $this->stdout("Image size after compressing: $fileSize bytes\n", Console::FG_GREEN);
 
         return self::EXIT_CODE_NORMAL;
     }
 
     /**
-     * Compress images in catalog.
-     * Old images will be moved to catalog with name "old".
+     * Compress images in catalog. Old images will be moved to catalog with name "old".
      *
      * @param string $path Path to images files.
+     *
+     * @return int
+     *
      * @throws \Exception
      */
     public function actionCompressCatalog($path)
@@ -128,36 +136,38 @@ class TinifyController extends Controller
 
         $oldCatalogName = 'old';
         $oldCatalogPath = Yii::getAlias($path . '/' . $oldCatalogName);
+
         if (!file_exists($oldCatalogPath)) {
             mkdir($oldCatalogPath);
         }
 
         $files = scandir(Yii::getAlias($path));
-
         $filesToCompressCount = 0;
         $filesToCompress = [];
+
         foreach ($files as $file) {
             $filePath = Yii::getAlias($path . DIRECTORY_SEPARATOR . $file);
+
             if (
-                (is_file($filePath)
-                && file_exists($filePath))
+                (is_file($filePath) && file_exists($filePath))
                 && TinifyData::allowCompression($filePath)
             ) {
                 $filesToCompressCount++;
                 $filesToCompress[] = $filePath;
             }
         }
+
         clearstatcache();
         $this->stdout("$filesToCompressCount files to compress...\n", Console::FG_YELLOW);
 
         foreach ($filesToCompress as $index => $file) {
             try {
-                $this->stdout('[' . (++$index). "]\t" . $file);
+                $this->stdout('[' . (++$index) . "]\t" . $file);
                 $startTime = microtime(true);
-
                 $source = Source::fromFile($file);
                 $oldFile = Yii::getAlias($path . '/' . $oldCatalogName . '/' . StringHelper::basename($file));
                 rename($file, $oldFile);
+
                 if (!$source->toFile($file)) {
                     rename($oldFile, $file);
                     $this->stdout("[Error]\n", Console::FG_RED);
@@ -171,6 +181,8 @@ class TinifyController extends Controller
         }
 
         $this->stdout("Complete!\n", Console::FG_YELLOW);
+
+        return self::EXIT_CODE_NORMAL;
     }
 
     /**

@@ -13,16 +13,15 @@ namespace vintage\tinify;
 
 use Yii;
 use yii\base\InvalidConfigException;
+use vintage\tinify\helpers\TinifyData;
+use vintage\tinify\components\TinifyResize;
 use Tinify\Tinify;
 use Tinify\Source;
 use Tinify\AccountException;
-use vintage\tinify\helpers\TinifyData;
-use vintage\tinify\components\TinifyResize;
 
 /**
- * Provides Tinify API.
+ * Component for Tinify PHP SDK.
  *
- * API documentation
  * @see https://tinypng.com/developers/reference/php
  *
  * @author Vladimir Kuprienko <vldmr.kuprienko@gmail.com>
@@ -39,28 +38,49 @@ class UploadedFile extends \yii\web\UploadedFile
      */
     public $apiToken = null;
     /**
-     * @var bool Flag for compress images.
+     * Compress images or not.
+     *
+     * @var bool
      */
     public $compress = true;
     /**
-     * @var array What metadata need to save.
+     * List of metadata to save.
+     *
+     * @var array
+     *
      * @since 2.0
      */
     public $saveMetadata = [];
 
 
     /**
-     * @inheritdoc
+     * Initialize the component.
+     *
      * @throws InvalidConfigException
      */
     public function init()
     {
         $paramToken = TinifyData::getApiToken();
 
-        if ($this->apiToken === null && $paramToken === null) {
-            throw new InvalidConfigException('You should to set API token');
+        if (null === $this->apiToken && null === $paramToken) {
+            throw new InvalidConfigException('You must provide API token');
         }
+
         Tinify::setKey($this->apiToken ?: $paramToken);
+    }
+
+    /**
+     * Creates TinifyResize object.
+     *
+     * @return TinifyResize
+     *
+     * @since 2.0
+     *
+     * @throws InvalidConfigException
+     */
+    public function resize()
+    {
+        return Yii::createObject(TinifyResize::className(), [$this->tempName]);
     }
 
     /**
@@ -68,20 +88,25 @@ class UploadedFile extends \yii\web\UploadedFile
      */
     public function saveAs($file, $deleteTempFile = true)
     {
-        if ($this->error == UPLOAD_ERR_OK) {
+        if (UPLOAD_ERR_OK == $this->error) {
             if ($deleteTempFile) {
                 if ($this->allowCompression()) {
-                    $res = $this->compressFile($this->tempName, $file);
+                    $result = $this->compressFile($this->tempName, $file);
                     unlink($this->tempName);
-                    return $res;
+
+                    return $result;
                 }
+
                 return move_uploaded_file($this->tempName, $file);
-            } elseif (is_uploaded_file($this->tempName)) {
+            }
+
+            if (is_uploaded_file($this->tempName)) {
                 return $this->allowCompression()
                     ? $this->compressFile($this->tempName, $file)
                     : copy($this->tempName, $file);
             }
         }
+
         return false;
     }
 
@@ -89,6 +114,7 @@ class UploadedFile extends \yii\web\UploadedFile
      * Check where compressing is allowed for current file.
      *
      * @return bool
+     *
      * @since 2.0
      */
     protected function allowCompression()
@@ -97,38 +123,33 @@ class UploadedFile extends \yii\web\UploadedFile
     }
 
     /**
-     * Compress file method.
+     * Compress file.
      *
-     * @param string $tempFile path to temp file.
-     * @param string $resultFile path for save compressed file.
+     * @param string $tempFile      Path to temp file.
+     * @param string $resultFile    Path for save compressed file.
+     *
      * @return bool
+     *
      * @throws AccountException
      */
     protected function compressFile($tempFile, $resultFile)
     {
-        $res = false;
+        $result = false;
+
         try {
             $source = Source::fromFile($tempFile);
+
             if (!empty($this->saveMetadata)) {
                 $source = $source->preserve($this->saveMetadata);
             }
-            $res = $source->toFile($resultFile);
+
+            $result = $source->toFile($resultFile);
         } catch (AccountException $ex) {
             throw $ex;
         } catch (\Exception $ex) {
-            Yii::trace($ex->getMessage(), 'tinify');
+            Yii::$app->getErrorHandler()->logException($ex);
         }
-        return (bool)$res;
-    }
 
-    /**
-     * Creates TinifyResize object.
-     *
-     * @return TinifyResize
-     * @since 2.0
-     */
-    public function resize()
-    {
-        return Yii::createObject(TinifyResize::class, [$this->tempName]);
+        return (bool) $result;
     }
 }

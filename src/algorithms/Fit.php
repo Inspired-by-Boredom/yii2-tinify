@@ -28,9 +28,10 @@ class Fit extends AbstractAlgorithm
     {
         if (empty($this->width) && empty($this->height)) {
             throw new InvalidConfigException(
-                'For "' . self::className() . '" algorithm you should to set a "width" and "height"'
+                'For "' . self::className() . '" algorithm you must set a "width" and "height"'
             );
         }
+
         return [
             'width' => $this->width,
             'height' => $this->height,

@@ -22,11 +22,15 @@ use yii\base\Object;
 abstract class AbstractAlgorithm extends Object implements TinifyAlgorithmInterface
 {
     /**
-     * @var int Image width.
+     * Image width.
+     *
+     * @var int
      */
     protected $width;
     /**
-     * @var int Image height.
+     * Image height.
+     *
+     * @var int
      */
     protected $height;
 

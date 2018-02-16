@@ -23,6 +23,7 @@ interface TinifyAlgorithmInterface
      * Setter for image width.
      *
      * @param int $width
+     *
      * @return void
      */
     public function setWidth($width);
@@ -31,6 +32,7 @@ interface TinifyAlgorithmInterface
      * Setter for image height.
      *
      * @param int $height
+     *
      * @return void
      */
     public function setHeight($height);

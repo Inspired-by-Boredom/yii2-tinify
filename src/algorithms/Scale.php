@@ -28,16 +28,18 @@ class Scale extends AbstractAlgorithm
     {
         if (empty($this->width) && empty($this->height)) {
             throw new InvalidConfigException(
-                'For "' . self::className() . '" algorithm you should to set a "width" or "height"'
+                'For "' . self::className() . '" algorithm you must set a "width" or "height"'
             );
         }
 
         $config = [];
+
         if (!empty($this->width)) {
             $config['width'] = $this->width;
         } else {
             $config['height'] = $this->height;
         }
+
         return $config;
     }
 }

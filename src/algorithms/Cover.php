@@ -25,6 +25,7 @@ class Cover extends AbstractAlgorithm
     public function getConfig()
     {
         $config = [];
+
         if (empty($this->width)) {
             $config['width'] = $this->height;
             $config['height'] = $this->height;
@@ -35,6 +36,7 @@ class Cover extends AbstractAlgorithm
             $config['width'] = $this->width;
             $config['height'] = $this->height;
         }
+
         return $config;
     }
 }

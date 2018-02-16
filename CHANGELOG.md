@@ -14,5 +14,4 @@ Tinify API Change Log
 * Initial release
 
 Development started July 27, 2017
---------------------------------- 
-
+---------------------------------
