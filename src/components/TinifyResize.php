@@ -65,6 +65,8 @@ class TinifyResize extends Object
             );
         }
 
+        \Tinify\setKey(TinifyData::getApiToken());
+
         parent::__construct($config);
     }
 
