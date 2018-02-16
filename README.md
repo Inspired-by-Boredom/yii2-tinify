@@ -3,7 +3,6 @@
         <img src="https://tinypng.com/images/social/website.jpg" height="150px">
     </a>
     <h1 align="center">Tinify API</h1>
-    <br>
 </p>
 
 Facade of Tinify API for Yii2 Framework. This extension allows you to resize and compress images without loss of quality.
@@ -18,23 +17,27 @@ For more information you can [read official](https://tinypng.com/developers/refe
 Installation
 ------------
 
-#### Install package
+The preferred way to install this extension is through [composer](http://getcomposer.org/download/).
 
-Run command
-```bash
+Either run
+
+```
 $ composer require vintage/yii2-tinify
 ```
 
 or add
-```json
+
+```
 "vintage/yii2-tinify": "~2.0"
 ```
-to the require section of your `composer.json` file.
+
+to the `require` section of your `composer.json`.
 
 Usage
 -----
 
 ### Component
+
 1. Configure API token in app params with key `tinify-api-token` or in `UploadedFile` component
 2. Use `\vintage\tinify\UploadedFile` instead of `\yii\web\UploadedFile`
 
@@ -49,8 +52,42 @@ $file->saveMetadata = UploadedFile::METADATA_LOCATION;
 $file->saveMetadata = [UploadedFile::METADATA_LOCATION, UploadedFile::METADATA_CREATION];
 ```
 
+### Upload files to AWS S3 storage
+
+1. Configure AWS S3 service in `config/params-local.php`
+
+```php
+use vintage\tinify\UploadedFileS3;
+
+return [
+    // ...
+    UploadedFileS3::PARAM_KEY_AWS_ACCESS_KEY_ID         => '',
+    UploadedFileS3::PARAM_KEY_AWS_SECRET_ACCESS_KEY     => '',
+    UploadedFileS3::PARAM_KEY_S3_REGION                 => '',
+    UploadedFileS3::PARAM_KEY_S3_BUCKET                 => '',
+];
+```
+
+2. Use `\vintage\tinify\UploadedFileS3` insead of `\vintage\tinify\UploadedFile`
+3. Provide region and bucket name in methods calls
+
+```php
+$file = UploadedFile::getInstance($model, 'image')->saveAs('image.jpg');
+```
+
+also you can override region and bucket
+
+```php
+$file = UploadedFile::getInstance($model, 'image')
+    ->setRegion('us-west-1')
+    ->setPath('images-bucket/uploads') // path must be provided without slash in the end
+    ->saveAs('image.jpg');
+```
+
 ### Resizing
+
 You can resize uploaded file
+
 ```php
 $file = \vintage\tinify\UploadedFile::getInstance($model, 'image');
 $file->resize() // creates \vintage\tinify\components\TinifyResize object
@@ -62,9 +99,8 @@ $file->saveAs('@webroot/uploads');
 ```
 
 or resize existing image
-```php
-\Tinify\setKey(\vintage\tinify\helpers\TinifyData::getApiToken());
 
+```php
 (new \vintage\tinify\components\TinifyResize('@webroot/uploads/image.jpg'))
     ->scale()
     ->width(600)
@@ -72,13 +108,16 @@ or resize existing image
 ```
 
 ### CLI
+
 1. Configure console controller in `console/config/main.php`
+
 ```php
 'controllerMap' => [
     // ...
     'tinify' => \vintage\tinify\cli\TinifyController::class,
 ],
 ```
+
 2. Run in console `./yii tinify/<command>`
 
     | Command | Description |
@@ -92,13 +131,13 @@ Tests
 -----
 You can run tests with composer command
 
-```bash
+```
 $ composer test
 ```
 
 or using following command
 
-```bash
+```
 $ codecept build && codecept run
 ```
 

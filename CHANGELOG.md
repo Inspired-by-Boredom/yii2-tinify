@@ -4,6 +4,7 @@ Tinify API Change Log
 2.1.0 Under development
 -----------------------
 * Enh #4: Auto setting of API key in TinifyResize (greeflas)
+* Enh: Created component for uploading files to AWS S3 storage (greeflas)
 
 2.0.0 October 24, 2017
 ----------------------
