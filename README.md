@@ -107,6 +107,3 @@ Licence
 [![License](https://poser.pugx.org/vintage/yii2-tinify/license)](LICENSE)
 
 This project is released under the terms of the BSD-3-Clause [license](LICENSE).
-
-Copyright (c) 2017, [Vintage Web Production](https://vintage.com.ua/)
-
