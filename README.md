@@ -28,7 +28,7 @@ $ composer require vintage/yii2-tinify
 or add
 
 ```
-"vintage/yii2-tinify": "~2.0"
+"vintage/yii2-tinify": "~2.1"
 ```
 
 to the `require` section of your `composer.json`.
