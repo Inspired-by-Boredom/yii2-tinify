@@ -11,7 +11,7 @@
 
 namespace vintage\tinify\algorithms;
 
-use yii\base\Object;
+use yii\base\BaseObject;
 
 /**
  * Abstract algorithm class.
@@ -19,7 +19,7 @@ use yii\base\Object;
  * @author Vladimir Kuprienko <vldmr.kuprienko@gmail.com>
  * @since 2.0
  */
-abstract class AbstractAlgorithm extends Object implements TinifyAlgorithmInterface
+abstract class AbstractAlgorithm extends BaseObject implements TinifyAlgorithmInterface
 {
     /**
      * Image width.
