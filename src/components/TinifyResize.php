@@ -12,7 +12,7 @@
 namespace vintage\tinify\components;
 
 use Yii;
-use yii\base\Object;
+use yii\base\BaseObject;
 use yii\base\InvalidConfigException;
 use vintage\tinify\algorithms\Cover;
 use vintage\tinify\algorithms\Fit;
@@ -27,7 +27,7 @@ use Tinify\AccountException;
  * @author Vladimir Kuprienko <vldmr.kuprienko@gmail.com>
  * @since 2.0
  */
-class TinifyResize extends Object
+class TinifyResize extends BaseObject
 {
     /**
      * @var string
